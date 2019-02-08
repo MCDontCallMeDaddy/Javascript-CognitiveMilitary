@@ -1,0 +1,68 @@
+class List {
+
+  constructor() {
+    this.list = [];
+  }
+
+  getItemCount() {
+    return this.list.length;
+  }
+
+  addItem (item) {                                  // console.log(addItem(list, item));
+    this.list = [
+      ...this.list,
+      item
+    ];
+
+    return this.getItemCount();
+  }
+
+  removeItem (item) {                               // console.log(removeItem(list, list[0]));
+    this.list = this.list.filter((listItem) => {
+      return (listItem.id !== item.id);
+    });
+    // return list.filter((listItem) => {
+    //   return (listItem.id !== item.id);
+    // });
+    return this.getItemCount();
+  }
+
+  updateItem (itemId, newValue) {                                   // console.log(updateItem(list, list[0].id, newValue))
+    return this.list.map((listItem) => {
+      return (listItem.id === itemId) ? {...listItem, name: newValue} : listItem;
+      
+
+    });
+    // return list.map((listItem) => {
+    //   return (listItem.id === itemId) ? {...listItem, name: newValue} : listItem;
+    // });
+  }
+
+  getItem (itemId) {                                // console.log(getItem(list, list[0].id));
+    return this.list.find((listItem) => {
+      return (listItem.id === itemId);
+    });
+  }
+
+  getAllItems () {
+    return this.list;
+  }
+}
+
+const myList = new List();
+
+myList.addItem({id: "0", name: "Mike"});
+myList.addItem({id: "1", name: "Dom"});
+myList.addItem({id: "2", name: "Dan"});
+myList.addItem({id: "3", name: "Alex"});
+let myListContents = myList.getAllItems();
+console.log("myListContents:", myList.getAllItems());
+
+myList.removeItem(myList.list[0]);
+myList.removeItem(myList.list[1]);
+console.log("myListContents:", myList.getAllItems());
+
+myList.updateItem(myList.list[1].id, "Gerald");
+console.log("List with updated value:", myList.updateItem(myList.list[1].id, "Gerald"))
+console.log("myListContents:", myList.getAllItems());
+
